@@ -1,0 +1,68 @@
+<DOCTYPE html>
+
+<html lang="ro">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Calculeaza aria cercului</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">	
+	<div class="mt-5">	
+		<div class="d-flex" style="flex-direction: column;">
+			<label for="latura_patrat1">Latura Patrat 1:</label>
+			<input class="latura" type="number" id='latura_patrat1' name="latura_patrat1">
+		</div>
+		<div class="d-flex" style="flex-direction: column;">
+			<label for="latura_patrat2">Latura Patrat 2:</label>
+			<input class="latura" type="number" id='latura_patrat2' name="latura_patrat2">
+		</div>
+		<div class="d-flex" style="flex-direction: column;">
+			<label for="latura_patrat3">Latura Patrat 3:</label>
+			<input class="latura" type="number" id='latura_patrat3' name="latura_patrat3">
+		</div>
+		<button class="mt-1 btn btn-success" id="calculeaza">Calculeaza Aria</button>
+	</div>
+		<div id="response"></div>
+    </div>	
+</body>
+	<script>
+		const laturiPatrate = document.getElementsByClassName('latura');
+
+		const calculeaza = document.getElementById('calculeaza');
+
+ 		const resposeText = document.getElementById('response');
+
+
+		const calculateAriaOfSquares = (element1, element2, element3) => {
+			let arrayOfResults = [];
+			arrayOfResults.push(!isNaN(parseFloat(element1.value)) ? parseFloat(element1.value) * parseFloat(element1.value) : null);
+			arrayOfResults.push(!isNaN(parseFloat(element2.value)) ? parseFloat(element2.value) * parseFloat(element2.value) : null);
+			arrayOfResults.push(!isNaN(parseFloat(element3.value)) ? parseFloat(element3.value) * parseFloat(element3.value) : null);
+			return arrayOfResults;
+		}
+
+		document.addEventListener("DOMContentLoaded", () => {
+
+			calculeaza.addEventListener('click', () => {
+				if (laturiPatrate.length > 0 ) {
+					let response = ``;  
+					if(laturiPatrate[0] !== 'undefined' && laturiPatrate[1] !== 'undefined' && laturiPatrate[2] !== 'undefined') {
+					   let arii = calculateAriaOfSquares(laturiPatrate[0], laturiPatrate[1], laturiPatrate[2]);
+				     	   for(i in arii) {	
+					      response +=  arii[i] ? `<p>Aria patratului ${parseInt(i) + 1} este ${arii[i]} </p>` : `<p>Latura patratului ${parseInt(i)+1} este invalida</p>`;
+					   }
+					   	
+					   resposeText.innerHTML = response;
+					}
+				 }
+			});
+			
+		});
+
+	</script>
+
+</html>
